@@ -11,6 +11,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
@@ -102,7 +103,7 @@ public class GithubViewSourceController {
 						Elements code = doc.select("div.blob-wrapper");
 						content = code.outerHtml();
 					}
-					
+
 					// 防止win$.被winlet_local代码处理，替换$
 					content = content.replace("win$.", "win&#36;.");
 				} catch (IOException e) {
@@ -182,9 +183,17 @@ public class GithubViewSourceController {
 	@Return(value = "noarea", log = "area not found", view = "")
 	@Return(value = "nourl", log = "url not defined in JSON", view = "")
 	@Return(value = "nofile", log = "no source file defined", view = "")
-	public String mainWin(ReqInfo rInfo, @RequestParam("def") String def,
+	public String mainWin(
+			ReqInfo rInfo,
+			@RequestParam("def") String def,
 			@RequestParam(value = "id", required = false) Integer id,
+			@RequestHeader(value = "X-Url-Prefix", required = false) String urlPrefix,
 			Model model) throws JsonProcessingException, IOException {
+System.out.println("########################################################################################");
+System.out.println(rInfo.getPageId());
+System.out.println(urlPrefix);
+System.out.println("########################################################################################");
+
 		FileGroups fg = fileGroups.get(rInfo.getPageId() + def);
 
 		if (fg == null) { // 还未把JSON加载到fileGroups中
