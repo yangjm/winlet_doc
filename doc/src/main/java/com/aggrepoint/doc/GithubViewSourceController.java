@@ -189,12 +189,17 @@ public class GithubViewSourceController {
 			@RequestParam(value = "id", required = false) Integer id,
 			@RequestHeader(value = "X-Url-Prefix", required = false) String urlPrefix,
 			Model model) throws JsonProcessingException, IOException {
+		String pageId = rInfo.getPageId();
+
+		if (urlPrefix != null)
+			if (pageId.startsWith(urlPrefix))
+				pageId = pageId.substring(urlPrefix.length());
 System.out.println("########################################################################################");
-System.out.println(rInfo.getPageId());
+System.out.println(pageId);
 System.out.println(urlPrefix);
 System.out.println("########################################################################################");
 
-		FileGroups fg = fileGroups.get(rInfo.getPageId() + def);
+		FileGroups fg = fileGroups.get(pageId + def);
 
 		if (fg == null) { // 还未把JSON加载到fileGroups中
 			SiteContext sc = (SiteContext) rInfo.getRequest().getAttribute(
