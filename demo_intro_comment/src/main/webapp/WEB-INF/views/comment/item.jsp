@@ -8,4 +8,4 @@
 </div>
 <div>${comment.createTime}</div>
 <div>${comment.email}</div>
-<div>${comment.content}</div>
+<div>${comment.content.replace("&#xd;&#xa;", "<br>").replace("&#xd;", "<br>").replace("&#xa;", "<br>")}</div>

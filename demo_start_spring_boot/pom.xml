@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.aggrepoint</groupId>
-	<artifactId>doc_demo_intro_comment</artifactId>
+	<artifactId>doc_demo_start_spring_boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>Comment Demo</name>
-	<description>Winlet Demo - Comment</description>
+	<name>Spring Boot Template</name>
+	<description>Winlet Template - Spring Boot</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -58,7 +58,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>intro_comment</finalName>
+		<finalName>start_spring_boot</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

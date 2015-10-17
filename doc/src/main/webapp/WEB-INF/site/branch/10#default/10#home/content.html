@@ -1,0 +1,87 @@
+<h1 id="intro" class="page-header">介绍</h1>
+
+<p>一个网页中往往包含着多个来源的内容和多个不同的功能。例如一个带留言功能的博客页面，页面中的主体部分是发布成静态页面的博客正文，博客正文下面留言功能则是一个动态运行的应用模块。相对独立的多个应用模块也常常会出现在一个页面中，例如在博客页面里除了留言区域，可能还会有问卷调查功能区域。</p>
+
+<p>Winlet框架可以帮助开发人员以自然、简洁的方式开发只占据页面一个部分的、组件式的Web应用模块。在博客页面的例子中，留言功能和问卷调查功能可以作为两个独立的应用模块实现，在运行时嵌入到需要使用这些模块的博客页面中。</p>
+
+<h2 id="springmvc">与Spring MVC的关系</h2>
+
+<p>Winlet框架建立在Spring MVC的基础上。Spring MVC是一个优秀和强大的Java Web应用框架，越来越多项目选择它作为基础框架。Winlet框架在Spring MVC基础上进行了扩展。</p>
+<p>熟悉Spring MVC的开发人员可以非常快速地掌握Winlet框架的开发。同时，Spring MVC的所有强大的功能和特点，在基于Winlet框架开发的应用中都可以使用。开发人员可以选择基于Winlet框架实现只占据局部页面的功能模块，基于Spring MVC实现全页面展示的功能模块，并基于Spring MVC实现Restful Web服务。</p>
+<p>Winlet框架支持Spring Boot。在使用Spring Boot的项目中，只需要在pom.xml加入对Winlet库的依赖，无需任何额外配置开发人员就可以开始使用Winlet框架。</p>
+
+<h2 id="webwidget">与Web Widget的关系</h2>
+
+<p>从用户角度看，基于Winlet框架开发的应用与Web Widget有很多相似之处，例如只占据页面一个局部，可以方便地组合嵌入到静态页面中，可以被跨域使用等。</p>
+<p>与Web Widget通常实现相对简单的功能（参考Wikipedia <a href="https://en.wikipedia.org/wiki/Web_widget">It's a small application with limited functionality</a>）不同，Winlet可以在一个页面局部实现通常全页面动态应用所能实现的复杂功能。Winlet应用模块可以在服务器端、客户端灵活地组合在一起，因此还能实现通常全页面应用难以实现的、更复杂的页面功能。</p>
+<p>Web Widget的控制逻辑通常在客户端实现，需要编写大量的Javascript代码。使用Winlet开发应用时，主要的控制逻辑在服务器端以Java代码实现，页面端代码中开发人员通常只需调用框架提供的几个JS函数，无需编写大量JS代码。</p>
+
+<h2 id="webwidget">技术基础</h2>
+
+<p>Winlet框架主要基于以下技术构建：</p>
+<ul>
+	<li>Spring Framework, Spring MVC</li>
+	<li>jQuery</li>
+	<li>Bootstrap</li>
+	<li>Java 8</li>
+</ul>
+
+<h1 id="example" class="page-header">示例</h1>
+
+<p>以下是基于Winlet开发的一个简单的留言功能。为了简化逻辑，留言数据直接保存在内存中。应用代码也没有分层，Web层、服务层、数据访问层的所有逻辑全都在控制器类中实现。</p>
+
+<div class="panel panel-default demo">
+  <div class="panel-body">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs btm-20" role="tablist">
+    <li role="presentation" class="active"><a href="#example1_run" role="tab" data-toggle="tab">运行演示</a></li>
+    <li role="presentation"><a href="#example1_code" role="tab" data-toggle="tab">源代码</a></li>
+    <li role="presentation"><a href="#example1_download" role="tab" data-toggle="tab">下载本地运行</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="example1_run">
+		<div data-winlet="/intro_comment/comment/list"></div>
+	</div>
+    <div role="tabpanel" class="tab-pane" id="example1_code">
+    	<p>你也可以在<a href="https://github.com/yangjm/winlet_doc/tree/master/demo_intro_comment" target="_blank">GitHub</a>上查看源代码。</p>
+		<div data-winlet="doc/source/main?def=example1" data-preload></div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="example1_download">
+		<p>本例是一个独立的WAR项目，可以下载到本地在开发环境的测试服务器中运行，也可以被打包为war部署到Web应用服务器中运行。</p>
+    	<p>为了在本地开发环境中运行本示例项目，请做好以下准备：</p>
+    	<ul>
+    		<li>配置好Java 8。Winlet应用必须运行在Java 8环境中。</li>
+    		<li>开发环境中使用的测试服务器需支持Servlet 3.1和JSP 2.1</li>
+    		<li>配置好Maven。</li>
+    	</ul>
+    	<p>请按以下步骤从GitHub下载本例并在开发环境中启动运行。</p>
+    	<p>1. 执行以下命令将代码同步到本地。</p>
+    	<pre>git clone https://github.com/yangjm/winlet_doc.git</pre>
+    	<p>注：winlet_doc.git repository中保存的不仅仅是当前例子，还包括整个Winlet框架文档网站，以及在文档网站中演示的所有例子应用。</p>
+    	<p>2. 同步完毕后，在开发环境中用Import -> Existing Maven Project导入以下pom.xml文件：</p>
+    	<pre>winlet_doc/demo_intro_comment/pom.xml</pre>
+    	<p>3. 把项目doc_demo_intro_comment加入到测试服务器，启动测试服务器运行</p>
+    	<p>4. 用浏览器访问以下URL（假设测试服务器使用8080端口）：</p>
+    	<pre>http://localhost:8080/intro_comment/demo.html</pre>
+    </div>
+  </div>
+  </div>
+</div>
+
+<p>“运行演示”页展示了几个特点：</p>
+<ul>
+	<li>演示应用模块通过一个&lt;div&gt;标签插入到页面中。使用浏览器的查看源代码功能可以看到，在例子应用运行的位置的HTML代码是：&lt;div data-winlet="/intro_comment/comment/list"&gt;&lt;/div&gt;。这个标签所在的位置决定了Winlet应用要出现在页面中的位置。</li>
+	<li>用户与应用的所有交互都是通过局部页面刷新的方式来实现。</li>
+	<li>用户可以同时编辑多个留言。留言信息保存时需要通过基本的数据校验。留言信息会被编码以防止跨站攻击（用户可以在留言中输入&lt;script&gt;alert(1)&lt;/script&gt;这样的内容）。</li>
+</ul>
+<p>通过源代码可以看到Winlet应用的几个特点：</p>
+<ul>
+	<li>所有Java代码中，只有控制器类CommentController中使用了来自于com.aggrepoint.winlet的@Winlet, @Window, @Action和@Return四个注解类。除此之外，整个代码的编写方式，与标准的Spring MVC应用完全相同。</li>
+	<li>JSP代码中除了标准的JSTL库之外，无需使用其他特殊的标签库。表单直接使用原始的HTML&lt;form&gt;标签，编辑框、按钮等也是直接原始的HTML代码。JSP页面中，为了实现与服务器端的交互，在几个按钮的onclick属性属性中使用了Winlet框架提供的win$.post()和win$.embed()两个JS函数。为了说明表单显示时缺省选中的编辑框，在&lt;form&gt;标签上使用了data-winlet-focus属性。除此之外，代码中没有其他Winlet应用特有的内容。虽然整个应用运行时所有操作都是以局部页面刷新的方式来实现，但开发人员无需为此编写JS代码。</li>
+	<li>Winlet框架支持标准的Spring MVC数据校验方式。数据对象类Comment中使用了Hibernate的@NotEmpty，@Email等注解说明留言中邮件、内容的数据校验规则。如果数据校验不通过，Winlet框架会自动将错误信息回显在表单中，开发人员无需在控制器代码中或者JSP页面中做任何处理。如果使用基础的Spring MVC，开发人员需要JSP页面中自行加入数据校验错误信息显示的处理逻辑。</li>
+	<li>Winlet框架自动对显示在JSP页面中的数据对象的属性进行格式化。对于字符串类型的属性，例如Comment类的content属性，Winlet框架会自动使用OWASP的ESAPI对其进行HTML编码，以防止跨站攻击。对于具有格式化注解的属性，例如Comment对象createTime上有@DateTimeFormat注解，Winlet框架会在显示属性时自动应用格式化注解。使用基础的Spring MVC，为了使格式化注解在JSP显示时生效，需要专门使用Spring特有的显示标签。</li>
+	<li>Winlet框架支持Spring Boot。由于使用了Spring Boot，这个例子应用中没有任何Spring相关的配置文件，甚至没有web.xml。Winlet框架也可以在非Spring Boot的环境中使用。</li>
+</ul>
+<p>这个例子中使用到Winlet框架特有的内容一共只有4个在控制器中使用的注解类，2个在JSP中使用的JS函数，1个用在&lt;form&gt;上的属性。对于熟悉Spring MVC开发人员来说，Winlet框架的学习门槛很低。</p>

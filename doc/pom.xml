@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.aggrepoint</groupId>
-	<artifactId>doc_demo_intro_comment</artifactId>
+	<artifactId>doc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>Comment Demo</name>
-	<description>Winlet Demo - Comment</description>
+	<name>Winlet Doc</name>
+	<description>Winlet Document</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -42,6 +42,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
@@ -58,7 +64,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>intro_comment</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -67,3 +72,4 @@
 		</plugins>
 	</build>
 </project>
+

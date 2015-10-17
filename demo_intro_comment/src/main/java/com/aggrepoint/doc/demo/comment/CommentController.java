@@ -91,7 +91,7 @@ public class CommentController {
 	 */
 	@Action
 	@Return(value = "error", log = "validation error", view = "")
-	@Return(value = "added", log = "new comment saved", view = "", update = "window")
+	@Return(value = "added", log = "new comment saved", view = "", update = "!list")
 	@Return(value = "update", log = "comment updated", view = "item")
 	public String save(@Valid Comment comment, BindingResult bresult,
 			Model model) {
@@ -112,8 +112,10 @@ public class CommentController {
 
 		// 修改现有留言
 		Comment current = findCommentById(comment.getId());
-		if (current != null)
-			current.copy(comment);
+		if (current == null) // 找不到被修改的留言
+			return "";
+
+		current.copy(comment);
 
 		// 重新显示被修改了的留言
 		model.addAttribute("comment", current);
