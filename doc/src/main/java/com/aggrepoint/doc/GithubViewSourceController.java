@@ -194,10 +194,6 @@ public class GithubViewSourceController {
 		if (urlPrefix != null)
 			if (pageId.startsWith(urlPrefix))
 				pageId = pageId.substring(urlPrefix.length());
-System.out.println("########################################################################################");
-System.out.println(pageId);
-System.out.println(urlPrefix);
-System.out.println("########################################################################################");
 
 		FileGroups fg = fileGroups.get(pageId + def);
 
@@ -235,7 +231,7 @@ System.out.println("############################################################
 			}
 
 			fg = new FileGroups(groups);
-			fileGroups.put(rInfo.getPageId() + def, fg);
+			fileGroups.put(pageId + def, fg);
 		}
 
 		if (id == null)
