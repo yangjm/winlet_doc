@@ -7,7 +7,7 @@ $(function() {
 		$content.css("margin-top", fixTopOffset + "px");
 	}
 
-	win$.init({top: fixTopOffset});
+	win$.init({top: fixTopOffset, delay: false});
 
 	$('body').scrollspy({
 		target : '#docindex',
@@ -31,7 +31,7 @@ $(function() {
 		}
 	});
 
-	var scrollVisible = function($toScroll, $scrollScope, topOffset) {
+	var scrollVisible = function($toScroll, $scrollScope) {
 	  return function() {
 	    var posi = win$.getPositionInViewport($toScroll);
 	    var contentPosi = win$.getPositionInViewport($scrollScope);
@@ -52,12 +52,12 @@ $(function() {
 	    if (posi.bottom >= posi.viewport.height && posi.top <= 0)
 	      return;
 
-	    if (posi.top < topOffset && posi.bottom < posi.viewport.height) { // 顶部和底部都偏移，移动
-	      var off1 = topOffset - posi.top;
+	    if (posi.top < 0 && posi.bottom < posi.viewport.height) { // 顶部和底部都偏移，移动
+	      var off1 = -posi.top;
 	      var off2 = posi.viewport.height - posi.bottom;
 	      move = Math.abs(off1) > Math.abs(off2) ? off2 : off1;
-	    } else if (posi.top > topOffset) {
-	      move = topOffset - posi.top;
+	    } else if (posi.top > 0) {
+	      move = -posi.top;
 	    }
 
 	    if (posi.bottom + move > maxBottom)
@@ -72,7 +72,7 @@ $(function() {
 	  }
 	};
 	
-	var scrollFunc = scrollVisible($("#docindex"), $("div#content"), fixTopOffset);
+	var scrollFunc = scrollVisible($("#docindex"), $("div#content"));
 	$(window).scroll(scrollFunc);
 	scrollFunc();
 });

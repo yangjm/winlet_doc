@@ -1,9 +1,167 @@
-<h1 id="springboot" class="page-header">使用Spring Boot</h1>
+<h1 id="setup">把Winlet加入项目</h1>
 
-<p>如果使用Spring Boot</p>
+<h2 id="javalib">Java库</h2>
 
-<h2 id="cfg">基本配置</h2>
+<p>Winlet Java库已经发布到Maven中央仓库。使用Maven的项目可以在pom.xml文件中添加以下依赖：</p>
 
-<h1 id="nospringboot" class="page-header">不使用Spring Boot</h1>
+<pre>
+&lt;dependency&gt;
+	&lt;groupId&gt;com.aggrepoint.framework&lt;/groupId&gt;
+	&lt;artifactId&gt;winlet&lt;/artifactId&gt;
+	&lt;version&gt;0.1.6&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
 
-<p>不使用Spring Boot</p>
+<h2 id="jscss">winlet_local</h2>
+
+<p>Winlet框架提供了一个Javascript脚本，以及与其配套的一个CSS文件和一组图片资源文件。这些文件被打包成名为winlet_local的项目，并发布在<a href="https://github.com/yangjm/winlet_local/tree/master/dist" target="_blank">GitHub</a>上。</p>
+<p>要用&lt;div&gt;标签嵌入Winlet应用的HTML页面需引用winlet_local项目提供的Javascript和CSS文件，以及其依赖的jQuery和Bootstrap。winlet_local的Javascript代码负责在页面显示时找到页面中调用Winlet窗口的&lt;div&gt;标签，与服务器发起请求获取Winlet窗口内容，并在后续过程中负责管理客户端与服务器端逻辑之间的交互。</p>
+
+<p>可以使用<a href="http://bower.io/" target="_blank">Bower</a>，执行以下命令获得最新版本的winlet_local文件，以及其依赖的jQuery和Bootstrap：</p>
+<pre>
+bower install winlet_local
+</pre>
+
+<p>或者可以选择执行以下命令从GitHub获得最新版本的winlet_local(在winlet_local\dist目录中):</p>
+<pre>
+git clone https://github.com/yangjm/winlet_local.git
+</pre>
+
+<p>或者可以点击以下链接下载winlet_local：</p>
+
+<ul>
+	<li><a href="/doc/download/winlet_local_0.1.18.zip">v0.1.18</a></li>
+</ul>
+
+<h1 id="springboot">Spring Boot项目</h1>
+
+<h2 id="springbootcfg">配置说明</h2>
+
+<p>在Spring Boot项目中，通过Maven引入Winlet库后，无需额外配置，Winlet框架就会生效。</p>
+<p>Winlet应用的JSP页面应放在目录/src/main/webapp/WEB-INF/views中。<p>
+
+<h2 id="springboottmpl">项目模版</h2>
+
+<p>为了帮助快速建立新的Winlet Spring Boot项目，开发人员可以从GitHub下载Winlet Spring Boot快速启动模版项目，在其基础上按自己项目的需要进行修改。</p>
+<div class="panel panel-default demo">
+  <div class="panel-body">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs btm-20" role="tablist">
+    <li role="presentation" class="active"><a href="#tmpl1_run" role="tab" data-toggle="tab">模版项目运行演示</a></li>
+    <li role="presentation"><a href="#tmpl1_code" role="tab" data-toggle="tab">源代码</a></li>
+    <li role="presentation"><a href="#tmpl1_download" role="tab" data-toggle="tab">下载使用模版</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="tmpl1_run">
+		<div data-winlet="/start_spring_boot/helloworld/win"></div>
+	</div>
+    <div role="tabpanel" class="tab-pane" id="tmpl1_code">
+    	<p>你也可以在<a href="https://github.com/yangjm/winlet_start_spring_boot" target="_blank">GitHub</a>上查看源代码。</p>
+		<div data-winlet="doc/source/main?def=springboot" data-preload></div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="tmpl1_download">
+    	<p>1. 本地开发环境做好准备：</p>
+    	<ul>
+    		<li>配置好Java 8</li>
+    		<li>开发环境中使用的测试服务器需支持Servlet 3.1和JSP 2.1</li>
+    		<li>配置好Maven。</li>
+    	</ul>
+		<p>2. 执行以下命令将模版项目下载到本地：</p>
+		<pre>git clone https://github.com/yangjm/winlet_start_spring_boot</pre>
+		<p>3. 在开发环境中使用Import -> Existing Maven Project导入以下winlet_start_spring_boot/pom.xml文件</p>
+		<p>4. 把导入的winlet_start_spring_boot项目加入到开发环境中的测试服务器，启动测试服务器</p>
+		<p>5. 假设测试服务器使用端口8080，用浏览器访问http://localhost:8080/start_spring_boot/index.html，确认模版应用运行正常。</p>
+		<p>6. 可以根据项目需要修改pom.xml文件内容，例如把groupId、artifactId、name、description根据项目情况进行修改。模版应用缺省使用的context root使/start_spring_boot，可以修改pom.xml中finalName的内容来将context root更改为其他值。</p>
+    </div>
+  </div>
+  </div>
+</div>
+
+<h1 id="springmvc">使用XML配置的Spring MVC项目</h1>
+
+<h2 id="springmvccfg">配置说明</h2>
+
+<p>使用XML配置的Spring MVC项目通过Maven引入Winlet库后，还需要进行以下配置以使Winlet框架生效:</p>
+
+<ol>
+	<li>在web.xml中，以com.aggrepoint.winlet.spring.WinletContextLoaderListener替换Spring的org.springframework.web.context.ContextLoaderListener:
+<pre>&lt;listener&gt;
+	&lt;listener-class&gt;com.aggrepoint.winlet.spring.WinletContextLoaderListener&lt;/listener-class&gt;
+&lt;/listener&gt;</pre>
+	</li>
+	<li>在web.xml中，以com.aggrepoint.winlet.spring.WinletDispatcherServlet替换Spring的org.springframework.web.servlet.DispatcherServlet，例如：
+<pre>&lt;servlet&gt;
+	&lt;servlet-name&gt;appServlet&lt;/servlet-name&gt;
+	&lt;servlet-class&gt;com.aggrepoint.winlet.spring.WinletDispatcherServlet&lt;/servlet-class&gt;
+	&lt;init-param&gt;
+		&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+		&lt;param-value&gt;/WEB-INF/spring/appServlet/servlet-context.xml&lt;/param-value&gt;
+	&lt;/init-param&gt;
+	&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;/servlet&gt;</pre>
+	</li>
+	<li>在web层的Spring容器配置文件中（该配置文件的名称和位置由web.xml中WinletDispatcherServlet的init-param指定。在上面web.xml配置例子中，该文件的名称为servlet-context.xml），定义bean com.aggrepoint.winlet.spring.WinletRequestMappingHandlerMapping，如：
+<pre>&lt;beans:bean id=&quot;handlerMapping&quot;
+	class=&quot;com.aggrepoint.winlet.spring.WinletRequestMappingHandlerMapping&quot; /&gt;</pre>
+	</li>
+	<li>在web层的Spring容器配置文件中，用com.aggrepoint.winlet.spring.WinletFormattingConversionServiceFactoryBean作为conversion service，并且启用Winlet提供的argument resolver类com.aggrepoint.winlet.spring.WinletHandlerMethodArgumentResolver：
+<pre>&lt;beans:bean id=&quot;conversionService&quot;
+	class=&quot;com.aggrepoint.winlet.spring.WinletFormattingConversionServiceFactoryBean&quot;&gt;
+&lt;/beans:bean&gt;
+
+&lt;annotation-driven conversion-service=&quot;conversionService&quot;&gt;
+	&lt;argument-resolvers&gt;
+		&lt;beans:bean
+			class=&#39;com.aggrepoint.winlet.spring.WinletHandlerMethodArgumentResolver&#39; /&gt;
+	&lt;/argument-resolvers&gt;
+&lt;/annotation-driven&gt;</pre>
+	</li>
+	<li>建议将Winlet使用的JSP文件放置在WEB-INF/views/目录中。为此需要在web层Spring容器配置文件中加入以下配置：
+<pre>&lt;beans:bean id=&quot;jspxResolver&quot;
+	class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;
+	p:order=&quot;100&quot; p:prefix=&quot;/WEB-INF/views/&quot; p:suffix=&quot;.jsp&quot; /&gt;</pre>
+	</li>
+</ol>
+
+<h2 id="springmvctmp">项目模版</h2>
+
+<p>为了帮助快速建立使用XML配置的Winlet项目，开发人员可以从GitHub下载Winlet Spring MVC快速启动模版项目，在其基础上按自己项目的需要进行修改。</p>
+<div class="panel panel-default demo">
+  <div class="panel-body">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs btm-20" role="tablist">
+    <li role="presentation" class="active"><a href="#tmpl2_run" role="tab" data-toggle="tab">模版项目运行演示</a></li>
+    <li role="presentation"><a href="#tmpl2_code" role="tab" data-toggle="tab">源代码</a></li>
+    <li role="presentation"><a href="#tmpl2_download" role="tab" data-toggle="tab">下载使用模版</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="tmpl2_run">
+		<div data-winlet="/start_spring_mvc/helloworld/win"></div>
+	</div>
+    <div role="tabpanel" class="tab-pane" id="tmpl2_code">
+    	<p>你也可以在<a href="https://github.com/yangjm/winlet_start_spring_mvc" target="_blank">GitHub</a>上查看源代码。</p>
+		<div data-winlet="doc/source/main?def=springmvc" data-preload></div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="tmpl2_download">
+    	<p>1. 本地开发环境做好准备：</p>
+    	<ul>
+    		<li>配置好Java 8</li>
+    		<li>开发环境中使用的测试服务器需支持Servlet 3.1和JSP 2.1</li>
+    		<li>配置好Maven。</li>
+    	</ul>
+		<p>2. 执行以下命令将模版项目下载到本地：</p>
+		<pre>git clone https://github.com/yangjm/winlet_start_spring_mvc</pre>
+		<p>3. 在开发环境中使用Import -> Existing Maven Project导入以下winlet_start_spring_mvc/pom.xml文件</p>
+		<p>4. 把导入的winlet_start_spring_mvc项目加入到开发环境中的测试服务器，启动测试服务器</p>
+		<p>5. 假设测试服务器使用端口8080，用浏览器访问http://localhost:8080/start_spring_mvc/resources/index.html，确认模版应用运行正常。</p>
+		<p>6. 可以根据项目需要修改pom.xml文件内容，例如把groupId、artifactId、name、description、finalName修改为项目相应的值。</p>
+		<p>7. 可以根据项目情况修改web.xml中的webAppRootKey值。</p>
+		<p>8. 模版的例子控制器类HelloWorld.java放在包com.aggrepoint.start中。如果修改了这个包名，需要相应修改servlet-context.xml中的context:component-scan的base-package属性。</p>
+    </div>
+  </div>
+  </div>
+</div>

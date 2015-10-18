@@ -1,4 +1,4 @@
-<h1 id="intro" class="page-header">介绍</h1>
+<h1 id="intro">介绍</h1>
 
 <p>一个网页中往往包含着多个来源的内容和多个不同的功能。例如一个带留言功能的博客页面，页面中的主体部分是发静态的博客正文，博客正文下面留言功能则是一个动态运行的应用模块。相对独立的多个应用模块也常常会出现在一个页面中，例如在博客页面里除了留言区域，可能还会有问卷调查功能区域。</p>
 
@@ -6,7 +6,7 @@
 
 <h2 id="springmvc">与Spring MVC的关系</h2>
 
-<p>Winlet框架建立在Spring MVC的基础上。Spring MVC是一个优秀和强大的Java Web应用框架，越来越多项目选择它作为基础框架。Winlet框架在Spring MVC基础上进行了扩展。</p>
+<p>Winlet框架建立在Spring MVC的基础上。Spring MVC是一个优秀和强大的Java Web应用框架。Winlet框架在Spring MVC基础上进行了扩展。</p>
 <p>熟悉Spring MVC的开发人员可以非常快速地掌握Winlet框架的开发。同时，Spring MVC的所有强大的功能和特点，在基于Winlet框架开发的应用中都可以使用。开发人员可以选择基于Winlet框架实现只占据局部页面的功能模块，基于Spring MVC实现全页面展示的功能模块，并基于Spring MVC实现Restful Web服务。</p>
 <p>Winlet框架支持Spring Boot。在使用Spring Boot的项目中，只需要在pom.xml加入对Winlet库的依赖，无需任何额外配置开发人员就可以开始使用Winlet框架。</p>
 
@@ -16,7 +16,7 @@
 <p>与Web Widget通常实现相对简单的功能（参考Wikipedia <a href="https://en.wikipedia.org/wiki/Web_widget">It's a small application with limited functionality</a>）不同，Winlet可以在一个页面局部实现通常全页面动态应用所能实现的复杂功能。Winlet应用模块可以在服务器端、客户端灵活地组合在一起，因此还能实现通常全页面应用难以实现的、更复杂的页面功能。</p>
 <p>Web Widget的控制逻辑通常在客户端实现，需要编写大量的Javascript代码。使用Winlet开发应用时，主要的控制逻辑在服务器端以Java代码实现，页面端代码中开发人员通常只需调用框架提供的几个JS函数，无需编写大量JS代码。</p>
 
-<h2 id="webwidget">技术基础</h2>
+<h2 id="framework">技术基础</h2>
 
 <p>Winlet框架主要基于以下技术构建：</p>
 <ul>
@@ -26,7 +26,7 @@
 	<li>Java 8</li>
 </ul>
 
-<h1 id="example" class="page-header">示例</h1>
+<h1 id="example">示例</h1>
 
 <p>以下是基于Winlet开发的一个简单的留言功能。为了简化逻辑，留言数据直接保存在内存中。应用代码也没有分层，Web层、服务层、数据访问层的所有逻辑全都在控制器类中实现。</p>
 
@@ -84,4 +84,4 @@
 	<li>Winlet框架自动对显示在JSP页面中的数据对象的属性进行格式化。对于字符串类型的属性，例如Comment类的content属性，Winlet框架会自动使用OWASP的ESAPI对其进行HTML编码，以防止跨站攻击。对于具有格式化注解的属性，例如Comment对象createTime上有@DateTimeFormat注解，Winlet框架会在显示属性时自动应用格式化注解。使用基础的Spring MVC，为了使格式化注解在JSP显示时生效，需要专门使用Spring特有的显示标签。</li>
 	<li>Winlet框架支持Spring Boot。由于使用了Spring Boot，这个例子应用中没有任何Spring相关的配置文件，甚至没有web.xml。Winlet框架也可以在非Spring Boot的环境中使用。</li>
 </ul>
-<p>这个例子中使用到Winlet框架特有的内容一共只有4个在控制器中使用的注解类，2个在JSP中使用的JS函数，1个用在&lt;form&gt;上的属性。对于熟悉Spring MVC开发人员来说，Winlet框架的学习门槛很低。</p>
+<p>这个例子中使用到Winlet框架特有的内容一共只有4个在控制器中使用的注解类，2个在JSP中使用的JS函数，1个用在&lt;form&gt;上的属性。熟悉Spring MVC开发人员可以很容易掌握Winlet框架。</p>

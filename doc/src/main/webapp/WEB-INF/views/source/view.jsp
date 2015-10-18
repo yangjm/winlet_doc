@@ -2,7 +2,7 @@
 
 <div class="clearfix">
 <c:forEach var="group" items="${groups}">
-	<div class="file-group">
+	<div class="file-group col-md-3 col-sm-4 col-xs-6">
 		<div>${group.name}</div>
 		<ul>
 			<c:forEach var="source" items="${group.files}">
