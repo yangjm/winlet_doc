@@ -34,7 +34,6 @@
 	<modules>
 		<module>doc</module>
 		<module>demo_intro_comment</module>
-		<module>demo_start_spring_boot</module>
 	</modules>
 
 	<build>
