@@ -1,4 +1,4 @@
-# License of doc project
+# License of doc Project
 
 The doc porject inside this repository is licensed under a
 Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
